@@ -15,23 +15,23 @@ export class App implements OnInit {
   constructor(private gameService: GameService) {}
 
   games: any[] = [];
-  loading = false;
+  carregando = false;
 
-  loadGames() {
-    this.loading = true;
+  carregaJogos() {
+    this.carregando = true;
 
     this.gameService.getGames().subscribe((data: any) => {
-      const results = data.results;
+      const resultado = data.results;
 
-      const shuffled = results.sort(() => 0.5 - Math.random());
+      const shuffled = resultado.sort(() => 0.5 - Math.random());
 
-      this.games = shuffled.slice(0, 10);
+      this.games = shuffled.slice(0, 20);
 
-      this.loading = false;
+      this.carregando = false;
     });
   }
 
   ngOnInit() {
-    this.loadGames(); // 👈 chama aqui
+    this.carregaJogos(); // 👈 chama aqui
   }
 }
