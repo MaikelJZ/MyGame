@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  rawgApiKey: 'Chave API'//Chave API
+  rawgApiKey: '//Chave API'//Chave API
 };

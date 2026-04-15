@@ -1,0 +1,23 @@
+<div *ngIf="game; else loading" class="p-6 text-white">
+
+  <h1 class="text-3xl font-bold mb-4">
+    {{ game.name }}
+  </h1>
+
+  <img 
+    [src]="game.background_image"
+    class="w-full max-w-2xl rounded mb-4"
+  />
+
+  <p class="text-gray-400 mb-4">
+    {{ game.description_raw }}
+  </p>
+
+  <p>⭐ Nota: {{ game.rating }}</p>
+  <p>📅 Lançamento: {{ game.released }}</p>
+
+</div>
+
+<ng-template #loading>
+  <p class="text-white">Carregando jogo...</p>
+</ng-template>
