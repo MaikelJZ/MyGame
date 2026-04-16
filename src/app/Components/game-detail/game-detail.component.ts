@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { GameService } from '../service/game.service';
+import { GameService } from '../../service/game.service';
 import { CommonModule } from '@angular/common';
 import { switchMap, map } from 'rxjs/operators';
 
