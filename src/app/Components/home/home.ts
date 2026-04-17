@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
    carregaJogos() {
     this.carregando = true;
 
-    this.gameService.getGames().subscribe((data: any) => {
+    this.gameService.pegaJogos().subscribe((data: any) => {
       const resultado = data.results;
 
       const shuffled = resultado.sort(() => 0.5 - Math.random());
@@ -34,6 +34,6 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.carregaJogos(); // 👈 chama aqui
+    this.carregaJogos();
   }
 }

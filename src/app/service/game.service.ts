@@ -11,11 +11,11 @@ export class GameService {
 
   constructor(private http: HttpClient) {}
 
-  getGames() {
+  pegaJogos() {
     return this.http.get(`${this.apiUrl}/games?key=${this.apiKey}`);
   }
 
-  getGameById(id: number) {
+  jogoPorId(id: number) {
     return this.http.get(`https://api.rawg.io/api/games/${id}?key=${this.apiKey}`
   );
 }

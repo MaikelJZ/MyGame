@@ -3,6 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { GameService } from '../../service/game.service';
 import { CommonModule } from '@angular/common';
 import { switchMap, map } from 'rxjs/operators';
+import { ChangeDetectorRef } from '@angular/core';
+
+
 
 @Component({
   selector: 'app-game-detail',
@@ -16,7 +19,8 @@ export class GameDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private gameService: GameService
+    private gameService: GameService,
+    private cd: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
@@ -24,11 +28,12 @@ export class GameDetailComponent implements OnInit {
       map(params => Number(params.get('id'))),
       switchMap(id => {
         this.game = null; // ativa loading
-        return this.gameService.getGameById(id);
+        return this.gameService.jogoPorId(id);
       })
     ).subscribe({
       next: (data) => {
         this.game = data;
+        this.cd.detectChanges();//Força Recarregar a página para mostrar os dados do jogo
       },
       error: (err) => {
         console.error(err);
