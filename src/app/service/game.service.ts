@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 export class GameService {
 
   private apiUrl = 'https://api.rawg.io/api';
-  private apiKey = '//Chave API';//Chave API
+  private apiKey = 'Chave API';//Chave API
 
   constructor(private http: HttpClient) {}
 
