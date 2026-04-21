@@ -27,8 +27,33 @@
         </button>
       </div>
 
+      <p class="text-sm text-placeholder">
+        Desenvolvido por
+        <span class="text-muted-foreground">
+          {{ game.developers.map(dev => dev.name).join(', ') }}
+        </span>
+      </p>
 
+      <p class="text-sm text-placeholder">
+        Plataformas Disponíveis
+        <span class="text-muted-foreground">
+          {{ game.platforms.map(p => p.platform.name).join(', ') }}
+        </span>
+      </p>
     </div>
+    <div class="rounded-[15px] bg-card p-5 lg:w-[180px] lg:shirink- bg-gray-800">
+      <h3 class="text-sm font-bold text-foreground">
+        Tempo para Finalizar
+      </h3>
+      <div class="flex items-center justify-between py-2.5">
+          <span class="text-sm font-semibold text-foreground" style="font-variant-numeric: tabular-nums;">
+            {{ game.playtime }} horas
+          </span>
+      </div>
+    </div>
+
+
+
   </div>
 
   <!--<h1 class="text-3xl font-bold mb-4">
