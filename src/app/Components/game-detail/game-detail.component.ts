@@ -40,4 +40,17 @@ export class GameDetailComponent implements OnInit {
       }
     });
   }
+
+  mostrarCompleto: boolean = false;
+
+alternarDescricao() {
+  this.mostrarCompleto = !this.mostrarCompleto;
+}
+
+pegaDescricao(descricao: string): string {
+  if (!this.mostrarCompleto && descricao.length > 300) {
+    return descricao.substring(0, 300) + '...';
+  }
+  return descricao;
+}
 }
