@@ -1,79 +1,69 @@
-<div *ngIf="game; else loading" class="p-6 text-white">
-  <div class="flex flex-col gap-5 md:flex-row md:gap-6">
-    <div class="mx-auto h-[320px] w-[240px] shrink-0 overflow-hidden rounded-2xl bg-card md:max-0">
-      <img [src]="game.background_image" alt="{{ game.name }}" class="h-full w-full object-cover">
-    </div>
-    <div class="flex flex-1 flex-col gap-3"><!-- Informações do jogo -->
-      <h1 class="text-2xl font-bold text-foreground md:text-3xl">
-        {{ game.name }}
-      </h1>
+<div class="flex min-w-0 flex-1 flex-col">
+  <main class="mx-auto w-full max-w-4xl px-4 py-6 md:px-6">
+    <div *ngIf="game; else loading" class="p-6 text-white">
 
-      <p class="text-sm text-placeholder">
-        Lançado em
-        <span class="text-muted-foreground">
-          {{ game.released }}
-        </span>
-      </p>
+      <div class="flex flex-col gap-5 md:flex-row md:gap-6">
 
-      <div class="mt-1">
-        <p class="text-sm leading-relaxed text-placeholder line-clamp-4"
-          style="display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden;">
-          {{ pegaDescricao(game.description_raw) }}
-        </p>
-        <button type="button"
-          class="mt-1 text-sm font-medium text-primary transition-colors hover:text-primary/80 cursor-pointer"
-          (click)="alternarDescricao()">
-          {{ mostrarCompleto ? 'Ver menos' : 'Ver mais' }}
-        </button>
+        <div class="mx-auto h-[320px] w-[240px] shrink-0 overflow-hidden rounded-2xl bg-card">
+          <img [src]="game.background_image" alt="{{ game.name }}" class="h-full w-full object-cover">
+        </div>
+
+        <div class="flex flex-1 flex-col gap-3">
+
+          <h1 class="text-2xl font-bold md:text-3xl">
+            {{ game.name }}
+          </h1>
+
+          <p class="text-sm">
+            Lançado em
+            <span>
+              {{ game.released }}
+            </span>
+          </p>
+
+          <div class="mt-1">
+            <p class="text-sm leading-relaxed">
+              {{ pegaDescricao(game.description_raw) }}
+            </p>
+
+            <button type="button" class="mt-1 text-sm font-medium text-primary cursor-pointer"
+              (click)="alternarDescricao()">
+              {{ mostrarCompleto ? 'Ver menos' : 'Ver mais' }}
+            </button>
+          </div>
+
+          <p class="text-sm">
+            Desenvolvido por
+            <span>
+              {{ game.developers.map(dev => dev.name).join(', ') }}
+            </span>
+          </p>
+
+          <p class="text-sm">
+            Plataformas Disponíveis
+            <span>
+              {{ game.platforms.map(p => p.platform.name).join(', ') }}
+            </span>
+          </p>
+        </div>
       </div>
-
-      <p class="text-sm text-placeholder">
-        Desenvolvido por
-        <span class="text-muted-foreground">
-          {{ game.developers.map(dev => dev.name).join(', ') }}
-        </span>
-      </p>
-
-      <p class="text-sm text-placeholder">
-        Plataformas Disponíveis
-        <span class="text-muted-foreground">
-          {{ game.platforms.map(p => p.platform.name).join(', ') }}
-        </span>
-      </p>
-    </div>
-    <div class="rounded-[15px] bg-card p-5 lg:w-[180px] lg:shirink- bg-gray-800">
-      <h3 class="text-sm font-bold text-foreground">
-        Tempo para Finalizar
-      </h3>
-      <div class="flex items-center justify-between py-2.5">
-          <span class="text-sm font-semibold text-foreground" style="font-variant-numeric: tabular-nums;">
-            {{ game.playtime }} horas
-          </span>
+      <div class="rounded-[20px] bg-card p-5 lg:w-[240px] lg:shrink-0 bg-gray-800 mt-6">
+        <h3 class="text-sm font-bold text-foreground">Tempo para Zerar</h3>
+        <div class="mt-3">
+          <div class="flex items-center justify-between py-2.5">
+            <div class="flex items-center gap-2.5"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" class="lucide lucide-clock h-4 w-4 text-placeholder" aria-hidden="true">
+                <path d="M12 6v6l4 2"></path>
+                <circle cx="12" cy="12" r="10"></circle>
+              </svg><span class="text-sm text-muted-foreground">História Principal</span></div><span
+              class="text-sm font-semibold text-foreground" style="font-variant-numeric: tabular-nums;">{{ game.playtime }}</span>
+          </div>      
+        </div>
       </div>
     </div>
-
-
-
-  </div>
-
-  <!--<h1 class="text-3xl font-bold mb-4">
-    {{ game.name }}
-  </h1>
-
-  <img 
-    [src]="game.background_image"
-    class="w-full max-w-2xl rounded mb-4"
-  />
-
-  <p class="text-gray-400 mb-4">
-    {{ game.description_raw }}
-  </p>
-
-  <p>⭐ Nota: {{ game.rating }}</p>
-  <p>📅 Lançamento: {{ game.released }}</p>-->
-
+  </main>
 </div>
-
 <ng-template #loading>
   <p class="text-white">Carregando jogo...</p>
 </ng-template>
