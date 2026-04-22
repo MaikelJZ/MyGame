@@ -28,7 +28,6 @@ export class HomeComponent implements OnInit {
       const shuffled = resultado.sort(() => 0.5 - Math.random());
 
       this.games = shuffled.slice(0, 20);
-
     this.carregando = false;
     });
   }

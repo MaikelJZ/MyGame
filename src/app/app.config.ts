@@ -13,6 +13,6 @@ export const appConfig: ApplicationConfig = {
       onSameUrlNavigation: 'reload'
     })),
     provideClientHydration(withEventReplay()),
-    provideHttpClient(withFetch()) // 👈 FALTAVA ISSO
+    provideHttpClient(withFetch())
   ]
 };
