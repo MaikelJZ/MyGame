@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { GameService } from '../../service/game.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { timeout } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -16,23 +17,45 @@ export class HomeComponent implements OnInit {
 
   games: any[] = [];
   carregando = false;
+  total = 0;
+  page = 1;
+  pageSize = 40;
 
-  constructor(private gameService: GameService) {}
+  constructor(private gameService: GameService) { }
 
-   carregaJogos() {
+  carregaJogos() {
     this.carregando = true;
 
-    this.gameService.pegaJogos().subscribe((data: any) => {
-      const resultado = data.results;
+    this.gameService.pegaJogos(this.page, this.pageSize)
+    .pipe(timeout(5000))
+      .subscribe({
+        next: (data: any) => {
+          this.games = data.results;
+          this.total = data.count;
+          this.carregando = false;
+        },
+        error: (err) => {
+          this.carregando = false;
+        }
+      });
+  }
 
-      const shuffled = resultado.sort(() => 0.5 - Math.random());
+  proximaPagina() {
+    this.page++;
+    this.carregaJogos();
+  }
 
-      this.games = shuffled.slice(0, 20);
-    this.carregando = false;
-    });
+  paginaAnterior() {
+    if (this.page > 1) {
+      this.page--;
+      this.carregaJogos();
+    }
   }
 
   ngOnInit() {
     this.carregaJogos();
+    console.log('Buscando jogos...', this.page);
   }
 }
+
+
