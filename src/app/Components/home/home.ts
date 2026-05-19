@@ -30,7 +30,11 @@ export class HomeComponent implements OnInit {
     .pipe(timeout(5000))
       .subscribe({
         next: (data: any) => {
-          this.games = data.results;
+          
+          this.games = data.results.sort((a: any, b: any) =>
+          a.name.localeCompare(b.name)
+        );
+          //this.games = data.results;
           this.total = data.count;
           this.carregando = false;
         },
