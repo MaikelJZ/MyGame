@@ -5,7 +5,11 @@
   <div *ngFor="let game of games"
     class="bg-gray-800 rounded-lg overflow-hidden hover:scale-105 transition block cursor-pointer"
     [routerLink]="['/game', game.id]">
-    <img [src]="game.background_image" alt="{{ game.name }}" class="w-full h-60 object-cover" />
+    <img 
+    [src]="game.background_image" 
+    alt="{{ game.name }}" 
+    class="w-full h-60 object-cover"
+    loading="lazy" />
 
     <div class="p-3">
       <h2 class="text-sm font-semibold">
@@ -17,16 +21,13 @@
 </div>
 <div class="flex justify-center items-center gap-4 mt-6">
 
-  <button (click)="paginaAnterior()"
-    [disabled]="page === 1"
-    class="bg-gray-700 px-4 py-2 rounded disabled:opacity-50">
+  <button (click)="paginaAnterior()" [disabled]="page === 1" class="bg-gray-700 px-4 py-2 rounded disabled:opacity-50">
     ← Anterior
   </button>
 
   <span>Página {{ page }}</span>
 
-  <button (click)="proximaPagina()"
-    class="bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded">
+  <button (click)="proximaPagina()" class="bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded">
     Próxima →
   </button>
 

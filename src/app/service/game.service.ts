@@ -14,7 +14,7 @@ export class GameService {
 
   pegaJogos(page: number = 1, pageSize: number = 40) {
   return this.http.get(
-    `${this.apiUrl}/games?key=${this.apiKey}&page=${page}&page_size=${pageSize}`
+    `${this.apiUrl}/games?key=${this.apiKey}&page=${page}&page_size=${pageSize}&ordering=name`
   );
 }
 
