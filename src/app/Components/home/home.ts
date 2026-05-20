@@ -5,11 +5,14 @@ import { GameService } from '../../service/game.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { timeout } from 'rxjs';
+import { FormsModule } from '@angular/forms';
+import { Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, FormsModule],
   templateUrl: './home.html'
 
 })
@@ -20,13 +23,19 @@ export class HomeComponent implements OnInit {
   total = 0;
   page = 1;
   pageSize = 40;
+  searchTerm = '';
+  searchSubject = new Subject<string>();
 
   constructor(private gameService: GameService) { }
 
   carregaJogos() {
     this.carregando = true;
 
-    this.gameService.pegaJogos(this.page, this.pageSize)
+    this.gameService.
+    pegaJogos(
+      this.page, 
+      this.pageSize, 
+      this.searchTerm)
     .pipe(timeout(5000))
       .subscribe({
         next: (data: any) => {
@@ -54,8 +63,21 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.carregaJogos();
-    console.log('Buscando jogos...', this.page);
+    
+    this.searchSubject
+    .pipe(
+      debounceTime(500),
+      distinctUntilChanged()
+    )
+    .subscribe(search => {
+
+      this.searchTerm = search;
+      this.page = 1;
+
+      this.carregaJogos();
+      console.log('Buscando jogos...', this.page);
+    });
+    
   }
 }
 

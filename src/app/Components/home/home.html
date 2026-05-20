@@ -1,3 +1,25 @@
+<div class="relative flex-1"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+    class="lucide lucide-search pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-placeholder"
+    aria-hidden="true">
+    <path d="m21 21-4.34-4.34"></path>
+    <circle cx="11" cy="11" r="8"></circle>
+  </svg>
+  <input placeholder="Buscar jogos..." aria-label="Buscar" maxlength="100"
+    class="h-12 w-full rounded-xl border border-input bg-card pl-12 pr-10 text-sm text-foreground placeholder:text-placeholder outline-none transition-colors focus:border-primary"
+    type="text" 
+    [(ngModel)]="searchTerm"
+     (input)="searchSubject.next($any($event.target).value)"
+     >
+    <button type="button" aria-label="Fechar"
+    class="absolute right-4 top-1/2 -translate-y-1/2 text-placeholder transition-colors hover:text-foreground"><svg
+      xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x h-4 w-4"
+      aria-hidden="true">
+      <path d="M18 6 6 18"></path>
+      <path d="m6 6 12 12"></path>
+    </svg></button></div>
+
 <h1 class="text-3xl font-bold mb-6">Jogos 🎮</h1>
 
 <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
@@ -5,11 +27,7 @@
   <div *ngFor="let game of games"
     class="bg-gray-800 rounded-lg overflow-hidden hover:scale-105 transition block cursor-pointer"
     [routerLink]="['/game', game.id]">
-    <img 
-    [src]="game.background_image" 
-    alt="{{ game.name }}" 
-    class="w-full h-60 object-cover"
-    loading="lazy" />
+    <img [src]="game.background_image" alt="{{ game.name }}" class="w-full h-60 object-cover" loading="lazy" />
 
     <div class="p-3">
       <h2 class="text-sm font-semibold">

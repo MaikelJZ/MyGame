@@ -12,9 +12,9 @@ export class GameService {
 
   constructor(private http: HttpClient) { }
 
-  pegaJogos(page: number = 1, pageSize: number = 40) {
+  pegaJogos(page: number = 1, pageSize: number = 40, search: string = '') {
   return this.http.get(
-    `${this.apiUrl}/games?key=${this.apiKey}&page=${page}&page_size=${pageSize}&ordering=name`
+    `${this.apiUrl}/games?key=${this.apiKey}&page=${page}&page_size=${pageSize}&ordering=-rating&search=${search}&search_exact=true`
   );
 }
 
